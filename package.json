@@ -1,0 +1,17 @@
+{
+  "name": "lottie-profile-validator",
+  "version": "0.0.1",
+  "description": "Experimental project to validate a lottie file to a profile with feature configuraitons",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "test-debug": "node --inspect-brk node_modules/.bin/jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "jest": "^29.7.0"
+  }
+}

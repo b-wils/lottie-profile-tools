@@ -1,0 +1,75 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://github.com/lottie-animation-community/lottie-spec/schema/",
+    "type": "object",
+    "allOf": [
+        {
+            "$ref": "#/$defs/rectangle/disallow-rectangle"
+        }
+    ],
+    "$defs": {
+        "rectangle": {
+            "disallow-rectangle": {
+                "type": "object",
+                "properties": {
+                    "layers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "shapes": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/$defs/rectangle/all-graphic-elements"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "all-graphic-elements": {
+                "oneOf": [
+                    {
+                        "$ref": "#/$defs/rectangle/group"
+                    },
+                    {
+                        "$ref": "#/$defs/rectangle/other-allowed-shapes"
+                    }
+                ]
+            },
+            "group": {
+                "type": "object",
+                "properties": {
+                    "ty": {
+                        "const": "gr"
+                    },
+                    "it": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/$defs/rectangle/all-graphic-elements"
+                        }
+                    }
+                }
+            },
+            "other-allowed-shapes": {
+                "type": "object",
+                "properties": {
+                    "ty": {
+                        "type": "string",
+                        "not": {
+                            "oneOf": [
+                                {
+                                    "const": "gr"
+                                },
+                                {
+                                    "const": "rc"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
