@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",
-    "test-debug": "node --inspect-brk node_modules/.bin/jest"
+    "test-debug": "node --inspect-brk node_modules/.bin/jest",
+    "build-bundle": "node utils/build-bundle.js"
   },
   "author": "",
   "license": "ISC",

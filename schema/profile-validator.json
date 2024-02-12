@@ -1,5 +1,20 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
-    "$ref": "schema/features/shapes/rectangle.json"
+    "properties": {
+        "layers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "shapes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "schema/features/shapes/shapes.json"
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

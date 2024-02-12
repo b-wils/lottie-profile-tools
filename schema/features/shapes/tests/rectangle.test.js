@@ -1,5 +1,4 @@
 const Ajv = require("ajv/dist/2020");
-const rectSchema = require("../rectangle.json");
 const rectLottie = require("./rectangle.lottie.json");
 const ellipseLottie = require("./ellipse.lottie.json");
 const {makeSchema} = require("../../../../utils/bundle-schema");
