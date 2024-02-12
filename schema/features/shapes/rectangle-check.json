@@ -1,10 +1,16 @@
 {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
-    "properties": {
-        "ty": {
-            "not": {
-                "const": "rc"
+    "$ref": "#/$defs/rectangle-check",
+    "$defs": {
+        "rectangle-check": {
+            "type": "object",
+            "errorMessage": "Rectangle not supported by current profile",
+            "properties": {
+                "ty": {
+                    "not": {
+                        "const": "rc"
+                    }
+                }
             }
         }
     }
