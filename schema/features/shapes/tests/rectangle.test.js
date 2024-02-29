@@ -9,11 +9,13 @@ const ajv = new Ajv({
   verbose: true,
 });
 
-ajv.addKeyword({
-  keyword: "errorMessage",
-  type: "object",
-  schemaType: "string",
-});
+require("ajv-errors")(ajv);
+
+// ajv.addKeyword({
+//   keyword: "errorMessage",
+//   type: "object",
+//   schemaType: "string",
+// });
 
 describe('Rectangle Validation', () => {
   let validate;
@@ -26,7 +28,9 @@ describe('Rectangle Validation', () => {
   test('fails if shape is a rectangle', async () => {
     const valid = validate(rectLottie);
     expect(valid).toBe(false);
-    const errorMessages = getUserErrorMessages(validate);
+    // const errorMessages = getUserErrorMessages(validate);
+    const errorMessages = validate.errors.filter(error => error.keyword === 'errorMessage').map(error => error.message);
+
     expect(errorMessages.length).toBe(1);
     expect(errorMessages[0]).toBe('Rectangle not supported by current profile');
   });
