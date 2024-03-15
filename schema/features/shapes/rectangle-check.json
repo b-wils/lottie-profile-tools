@@ -1,17 +1,103 @@
 {
+  "errorMessage": "Rectangle not supported by current profile",
+  "type": "object",
+  "if": {
+    "$ref": "#/$defs/is-rectangle-enabled"
+  },
+  "then": {},
+  "else": {
     "type": "object",
-    "$ref": "#/$defs/rectangle-check",
-    "$defs": {
-        "rectangle-check": {
-            "type": "object",
-            "errorMessage": "Rectangle not supported by current profile",
-            "properties": {
-                "ty": {
-                    "not": {
-                        "const": "rc"
-                    }
-                }
-            }
-        }
+    "properties": {
+      "lottie": {
+        "$ref": "#/$defs/animation"
+      }
     }
+  },
+  "$defs": {
+    "is-rectangle-enabled": {
+        "type": "object",
+        "properties": {
+            "profile": {
+              "type": "object",
+              "properties": {
+                "shapes": {
+                  "type": "object",
+                  "properties": {
+                    "rectangle": {
+                      "const": true
+                    }
+                  },
+                  "required": ["rectangle"]
+                }
+              },
+              "required": ["shapes"]
+            }
+          },
+          "required": ["profile"]
+    },
+    "animation": {
+      "type": "object",
+      "properties": {
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "shapes": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/shapes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "shapes": {
+      "$ref": "#/$defs/all-graphic-elements"
+    },
+    "all-graphic-elements": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/group"
+        },
+        {
+          "$ref": "#/$defs/other-shapes"
+        }
+      ]
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "ty": {
+          "const": "gr"
+        },
+        "it": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/all-graphic-elements"
+          }
+        }
+      }
+    },
+    "other-shapes": {
+      "type": "object",
+      "properties": {
+        "ty": {
+          "type": "string",
+          "not": {
+            "oneOf": [
+              {
+                "const": "gr"
+              },
+              {
+                "const": "rc"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
 }
